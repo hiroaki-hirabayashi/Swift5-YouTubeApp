@@ -19,20 +19,78 @@ class Page1ViewController: UITableViewController, SegementSlideContentScrollView
     var videoIdArray = [String]()
     var publishedAtArray = [String]()
     var titleArray = [String]()
-    var imageURLStringArray = [String]()
+    var thumbnailsArray = [String]()
     var youtubeURLArray = [String]()
     var channelTitleArray = [String]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        getData()
 
     }
     
     var scrollView: UIScrollView {
         return tableView
     }
+    // sectionの数を返す
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
     
+    // sectionごとのcellの数を返す
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return titleArray.count
+    }
+    
+    //セルの内容、情報
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        <#code#>
+    }
+    
+    //セルの高さ
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return view.frame.size.height/5
+    }
+    
+    
+    func getData() {
+        
+        var text = "https://www.googleapis.com/youtube/v3/search?key=APIKEY&q=犬&part=snippet&maxResults=40&order=date"
+        let url = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        
+        //requestを送る
+        AF.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default).responseJSON { (response) in
+            
+            //　JSON解析　40個値が来るのでfor文で配列に入れる
+            switch response .result {
+            case .success:
+                for i in 0...39 {
+                    let json: JSON = JSON(response.data as Any)
+                    let videoId = json["items"][i]["id"]["videoId"].string
+                    let publishedAt = json["items"][i]["snippet"]["publishedAt"].string
+                    let title = json["items"][i]["snippet"]["title"].string
+                    let thumbnails = json["items"][i]["snippet"]["thumbnails"]["default"]["url"].string
+                    let youtubeURL = "https://www.youtube.com/watch?v=\(videoId)"
+                    let channelTitle = json["items"][i]["snippet"]["channelTitle"].string
+                    
+                    self.videoIdArray.append(videoId!)
+                    self.publishedAtArray.append(publishedAt!)
+                    self.titleArray.append(title!)
+                    self.thumbnailsArray.append(thumbnails!)
+                    self.youtubeURLArray.append(youtubeURL)
+                    self.channelTitleArray.append(channelTitle!)
+                }
+                
+                break
+            case .failure(let error):
+                break
+            }
+            self.tableView.reloadData()
+        }
+    }
+   
 
     /*
     // MARK: - Navigation
