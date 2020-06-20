@@ -17,7 +17,7 @@ class Page5ViewController: UITableViewController, SegementSlideContentScrollView
     var youtubeData = YouTubeData()
     
     var videoIdArray = [String]()
-    var publishedAtArray = [String]()
+//    var publishedAtArray = [String]()
     var titleArray = [String]()
     var thumbnailsArray = [String]()
     var youtubeURLArray = [String]()
@@ -51,7 +51,7 @@ class Page5ViewController: UITableViewController, SegementSlideContentScrollView
         let profileImageURL = URL(string: self.thumbnailsArray[indexPath.row] as String)
         cell.imageView?.sd_setImage(with: profileImageURL, completed: nil)
         cell.textLabel?.text = self.titleArray[indexPath.row]
-        cell.detailTextLabel?.text = self.publishedAtArray[indexPath.row]
+//        cell.detailTextLabel?.text = self.publishedAtArray[indexPath.row]
         //Labelの行数を可変にする
         cell.textLabel?.adjustsFontSizeToFitWidth = true
         cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
@@ -77,7 +77,7 @@ class Page5ViewController: UITableViewController, SegementSlideContentScrollView
     
     func getData() {
         
-        var text = "https://www.googleapis.com/youtube/v3/search?key=APIKEY&q=料理&part=snippet&maxResults=40&order=date"
+        var text = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyBK7gMdnl3wg6x36-pNAVOd6jfZjUYJSW8&q=料理&part=snippet&maxResults=40&order=date"
         let url = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         
         //requestを送る
@@ -96,7 +96,7 @@ class Page5ViewController: UITableViewController, SegementSlideContentScrollView
                     let channelTitle = json["items"][i]["snippet"]["channelTitle"].string
                     
                     self.videoIdArray.append(videoId!)
-                    self.publishedAtArray.append(publishedAt!)
+//                    self.publishedAtArray.append(publishedAt!)
                     self.titleArray.append(title!)
                     self.thumbnailsArray.append(thumbnails!)
                     self.youtubeURLArray.append(youtubeURL)
