@@ -12,7 +12,7 @@ import Alamofire
 import SwiftyJSON
 import SDWebImage
 
-class Page1ViewController: UITableViewController, SegementSlideContentScrollViewDelegate {
+class Page2ViewController: UITableViewController, SegementSlideContentScrollViewDelegate {
 
     var youtubeData = YouTubeData()
     
@@ -77,7 +77,7 @@ class Page1ViewController: UITableViewController, SegementSlideContentScrollView
     
     func getData() {
         
-        var text = "https://www.googleapis.com/youtube/v3/search?key=APIKEY&q=IT&part=snippet&maxResults=40&order=date"
+        var text = "https://www.googleapis.com/youtube/v3/search?key=APIKEY&q=犬&part=snippet&maxResults=40&order=date"
         let url = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         
         //requestを送る

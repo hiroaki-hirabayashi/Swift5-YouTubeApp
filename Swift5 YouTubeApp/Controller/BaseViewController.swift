@@ -21,7 +21,7 @@ class BaseViewController: SegementSlideDefaultViewController {
     }
     
     //ヘッダー
-    override func segementSlideHeaderView() -> UIView? {
+        override var headerView: UIView? {
         let headerView = UIImageView()
         headerView.isUserInteractionEnabled = true
         headerView.contentMode = .scaleAspectFill
@@ -42,7 +42,26 @@ class BaseViewController: SegementSlideDefaultViewController {
         return ["IT","犬","ニュース","お笑い","料理","AAA",]
     }
     
-    
+    override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
+        
+        switch index {
+        case 0:
+            return Page1ViewController()
+        case 1:
+            return Page2ViewController()
+        case 2:
+            return Page3ViewController()
+        case 3:
+            return Page4ViewController()
+        case 4:
+            return Page5ViewController()
+        case 5:
+            return Page6ViewController()
+            
+        default:
+            return Page1ViewController()
+        }
+    }
         
         
         

@@ -7,15 +7,55 @@
 //
 
 import UIKit
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
+    let hours = 19
+    let minute = 00
+   //プッシュ通知を可能にするかどうかのフラグ
+    var notificationGranted = true
+    //最初の処理かどうかのフラグ
+    var isFirst = true
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        //強化を促すアラートを出す
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+            
+            self.notificationGranted = granted
+            
+            //if error != nil と同じ意味　errorの中に何かあればこの処理をしてください
+            if let error = error {
+                print("エラーです。")
+            }
+        }
+        //最初の処理なら実行。最初じゃなければ実行しない
+        isFirst = false
+
         return true
+    }
+    
+    func setNotification() {
+        var notificationTime = DateComponents()
+        var trigger: UNNotificationTrigger
+        
+        notificationTime.hour = hours
+        notificationTime.minute = minute
+        //notificationTimeの時間に通知を送る処理　いつ送るか
+        trigger = UNCalendarNotificationTrigger(dateMatching: notificationTime, repeats: true)
+        
+        //どんな文章を流すか
+        let content = UNMutableNotificationContent()
+        content.title = "19時になりました。"
+        content.body = "ニュースが更新されました。"
+        content.sound = .default
+        
+        //通知スタイル
+        let request = UNNotificationRequest(identifier: "uid", content: content, trigger: trigger)
+        //通知をセット
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
     }
 
     // MARK: UISceneSession Lifecycle
