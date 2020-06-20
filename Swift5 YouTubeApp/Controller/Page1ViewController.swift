@@ -61,7 +61,14 @@ class Page1ViewController: UITableViewController, SegementSlideContentScrollView
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
         cell.selectionStyle = .none
         let profileImageURL = URL(string: self.thumbnailsArray[indexPath.row] as String)
-        cell.imageView?.sd_setImage(with: profileImageURL, completed: nil)
+//        cell.imageView?.sd_setImage(with: profileImageURL, completed: nil)
+        
+        cell.imageView?.sd_setImage(with: profileImageURL, completed: { (image, error, _, _) in
+            //もしエラーが無ければ(nil)
+            if error == nil {
+                cell.setNeedsLayout()
+            }
+        })
         cell.textLabel?.text = self.titleArray[indexPath.row]
         cell.detailTextLabel?.text = self.publishedAtArray[indexPath.row]
         //Labelの行数を可変にする
