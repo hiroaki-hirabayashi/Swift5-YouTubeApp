@@ -49,7 +49,14 @@ class Page6ViewController: UITableViewController, SegementSlideContentScrollView
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
         cell.selectionStyle = .none
         let profileImageURL = URL(string: self.thumbnailsArray[indexPath.row] as String)
-        cell.imageView?.sd_setImage(with: profileImageURL, completed: nil)
+//        cell.imageView?.sd_setImage(with: profileImageURL, completed: nil)
+        cell.imageView?.sd_setImage(with: profileImageURL, completed: { (image, error, _, _) in
+            //もしエラーが無ければ(nil)
+            if error == nil {
+                cell.setNeedsLayout()
+            }
+        })
+
         cell.textLabel?.text = self.titleArray[indexPath.row]
 //        cell.detailTextLabel?.text = self.publishedAtArray[indexPath.row]
         //Labelの行数を可変にする
@@ -77,7 +84,7 @@ class Page6ViewController: UITableViewController, SegementSlideContentScrollView
     
     func getData() {
         
-        var text = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyBK7gMdnl3wg6x36-pNAVOd6jfZjUYJSW8&q=AAA&part=snippet&maxResults=40&order=date"
+        var text = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyBK7gMdnl3wg6x36-pNAVOd6jfZjUYJSW8&q=AAAライブ&part=snippet&maxResults=40&order=date"
         let url = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         
         //requestを送る
@@ -86,13 +93,13 @@ class Page6ViewController: UITableViewController, SegementSlideContentScrollView
             //　JSON解析　40個値が来るのでfor文で配列に入れる
             switch response .result {
             case .success:
-                for i in 0...39 {
+                for i in 0...19 {
                     let json: JSON = JSON(response.data as Any)
                     let videoId = json["items"][i]["id"]["videoId"].string
                     let publishedAt = json["items"][i]["snippet"]["publishedAt"].string
                     let title = json["items"][i]["snippet"]["title"].string
                     let thumbnails = json["items"][i]["snippet"]["thumbnails"]["default"]["url"].string
-                    let youtubeURL = "https://www.youtube.com/watch?v=\(videoId)"
+                    let youtubeURL = "https://www.youtube.com/watch?v=\(videoId!)"
                     let channelTitle = json["items"][i]["snippet"]["channelTitle"].string
                     
                     self.videoIdArray.append(videoId!)

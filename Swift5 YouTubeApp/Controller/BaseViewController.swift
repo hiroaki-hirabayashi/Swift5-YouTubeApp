@@ -20,8 +20,8 @@ class BaseViewController: SegementSlideDefaultViewController {
 //        scrollToSlide(at: 0, animated: true)
     }
     
-    //ヘッダー
-        override var headerView: UIView? {
+    //ヘッダー　メニュー画面
+       override func segementSlideHeaderView() -> UIView? {
         let headerView = UIImageView()
         headerView.isUserInteractionEnabled = true
         headerView.contentMode = .scaleAspectFill
@@ -37,7 +37,7 @@ class BaseViewController: SegementSlideDefaultViewController {
             return headerView
         }
     
-    //タブ
+    //タブとタイトル
     override var titlesInSwitcher: [String] {
         return ["IT","犬","ニュース","お笑い","料理","AAA",]
     }
