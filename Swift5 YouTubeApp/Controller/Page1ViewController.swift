@@ -22,13 +22,25 @@ class Page1ViewController: UITableViewController, SegementSlideContentScrollView
     var thumbnailsArray = [String]()
     var youtubeURLArray = [String]()
     var channelTitleArray = [String]()
+    var refresh = UIRefreshControl()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.refreshControl = refresh
+        refresh.addTarget(self, action: #selector(update), for: .valueChanged)
+        
         getData()
+        tableView.reloadData()
 
+    }
+    
+    @objc func update() {
+        getData()
+        tableView.reloadData()
+        //インディケーターを止める
+        refresh.endRefreshing()
     }
     
     var scrollView: UIScrollView {

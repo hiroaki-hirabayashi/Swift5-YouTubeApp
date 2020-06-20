@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         //最初の処理なら実行。最初じゃなければ実行しない
         isFirst = false
+        setNotification()
 
         return true
     }
@@ -56,6 +57,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let request = UNNotificationRequest(identifier: "uid", content: content, trigger: trigger)
         //通知をセット
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+    }
+    
+    //アプリが閉じてても通知が行く処理
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        setNotification()
     }
 
     // MARK: UISceneSession Lifecycle
