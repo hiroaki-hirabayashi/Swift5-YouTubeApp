@@ -84,11 +84,11 @@ class Page5ViewController: UITableViewController, SegementSlideContentScrollView
     
     func getData() {
         
-        var text = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyBK7gMdnl3wg6x36-pNAVOd6jfZjUYJSW8&q=料理&part=snippet&maxResults=40&order=date"
-        let url = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        
+        var text = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyCYpZzCx3-TdfpSM2RV7LG_JKVJY_r7X8w&q=料理&part=snippet&maxResults=40&order=date"
+        let url = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+
         //requestを送る
-        AF.request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default).responseJSON { (response) in
+        AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default).responseJSON { (response) in
             
             //　JSON解析　40個値が来るのでfor文で配列に入れる
             switch response .result {

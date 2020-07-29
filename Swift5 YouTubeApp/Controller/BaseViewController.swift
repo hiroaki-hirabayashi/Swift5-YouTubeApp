@@ -28,10 +28,10 @@ class BaseViewController: SegementSlideDefaultViewController {
         headerView.image = UIImage(named: "header")
         headerView.translatesAutoresizingMaskIntoConstraints = false
         let headerHeight: CGFloat
-        if #available(iOS 11.0, *) {
-            headerHeight = view.frame.height/4 + view.safeAreaInsets.top
+        if #available(iOS 13.6, *) {
+            headerHeight = view.frame.height/8 + view.safeAreaInsets.top
             } else {
-                headerHeight = view.frame.height/4 + topLayoutGuide.length
+                headerHeight = view.frame.height/8 + topLayoutGuide.length
             }
             headerView.heightAnchor.constraint(equalToConstant: headerHeight).isActive = true
             return headerView
@@ -39,7 +39,7 @@ class BaseViewController: SegementSlideDefaultViewController {
     
     //タブとタイトル
     override var titlesInSwitcher: [String] {
-        return ["IT","犬","ニュース","お笑い","料理","AAA",]
+        return ["コロナ","犬","ニュース","お笑い","料理","AAA",]
     }
     
     override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
