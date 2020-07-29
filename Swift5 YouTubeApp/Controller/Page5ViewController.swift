@@ -84,7 +84,7 @@ class Page5ViewController: UITableViewController, SegementSlideContentScrollView
     
     func getData() {
         
-        var text = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyCYpZzCx3-TdfpSM2RV7LG_JKVJY_r7X8w&q=料理&part=snippet&maxResults=40&order=date"
+        var text = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyCYpZzCx3-TdfpSM2RV7LG_JKVJY_r7X8w&q=アニメあたしンち&part=snippet&maxResults=40&order=date"
         let url = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
 
         //requestを送る

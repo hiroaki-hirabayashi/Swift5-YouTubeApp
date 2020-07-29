@@ -39,7 +39,7 @@ class BaseViewController: SegementSlideDefaultViewController {
     
     //タブとタイトル
     override var titlesInSwitcher: [String] {
-        return ["コロナ","犬","ニュース","お笑い","料理","AAA",]
+        return ["コロナ","犬","ニュース","お笑い","あたしンち","AAA",]
     }
     
     override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
