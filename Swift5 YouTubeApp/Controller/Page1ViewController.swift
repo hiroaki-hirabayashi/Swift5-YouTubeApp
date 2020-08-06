@@ -15,7 +15,6 @@ import SDWebImage
 class Page1ViewController: UITableViewController, SegementSlideContentScrollViewDelegate {
 
     var youtubeData = YouTubeData()
-    
     var videoIdArray = [String]()
 //    var publishedAtArray = [String]()
     var titleArray = [String]()
@@ -24,10 +23,8 @@ class Page1ViewController: UITableViewController, SegementSlideContentScrollView
     var channelTitleArray = [String]()
     var refresh = UIRefreshControl()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.refreshControl = refresh
         refresh.addTarget(self, action: #selector(update), for: .valueChanged)
         
@@ -46,6 +43,7 @@ class Page1ViewController: UITableViewController, SegementSlideContentScrollView
     var scrollView: UIScrollView {
         return tableView
     }
+    
     // sectionの数を返す
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -55,7 +53,6 @@ class Page1ViewController: UITableViewController, SegementSlideContentScrollView
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return titleArray.count
     }
-    
     //セルの内容、情報
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
