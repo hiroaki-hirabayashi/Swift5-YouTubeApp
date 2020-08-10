@@ -9,7 +9,6 @@
 import UIKit
 import SegementSlide
 
-
 class BaseViewController: SegementSlideDefaultViewController {
 
     override func viewDidLoad() {
@@ -43,7 +42,6 @@ class BaseViewController: SegementSlideDefaultViewController {
     }
     
     override func segementSlideContentViewController(at index: Int) -> SegementSlideContentScrollViewDelegate? {
-        
         switch index {
         case 0:
             return Page1ViewController()
@@ -57,14 +55,10 @@ class BaseViewController: SegementSlideDefaultViewController {
             return Page5ViewController()
         case 5:
             return Page6ViewController()
-            
         default:
             return Page1ViewController()
         }
     }
-        
-        
-        
 
 
 }
